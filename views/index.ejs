@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="stylesheets/output.css" />
+    <title>Todo App | Made by ReDhaBenKortbi</title>
+  </head>
+  <body class="w-full h-screen bg-gray-200">
+    <% if (errorMessage) { %>
+          <div id="notification" class="absolute top-5 left-1/2 -translate-x-1/2 bg-red-100 text-red-500 border border-red-500 px-6 py-2 rounded-md"><%= errorMessage %></div>
+    <% } %>
+    <div class="wrapper home__layout">
+      <%- include('partials/header.ejs') %>
+      <main class="relative">
+        <!-- CREATE TODO TASK -->
+        <%- include('partials/modal/todoModal.ejs') %>
+
+        <!-- TODOS -->
+        <div class="container mx-auto px-6 py-8">
+          <h1 class="text-2xl font-bold text-gray-800 mb-6">Your Todos</h1>
+          <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% if (todos.length > 0) { %>
+              <% todos.forEach(function(todo) { %>
+                <li
+                  class="p-4 bg-white shadow-md rounded-lg border border-gray-200
+                  <% if (todo.state === "completed") { %>
+                   border-green-600
+                  <% } %>
+                  "
+                >
+                  <div class="flex justify-between items-center mb-2">
+                    <h2 class="text-lg font-medium text-gray-700
+                    <% if(todo.state === "completed") {%>
+                      line-through italic
+                      <% } %>"
+                    >
+                      <%= todo.title %>
+                    </h2>
+                    <span
+                      class="px-2 py-1 text-sm font-semibold rounded-lg 
+                        <% if (todo.state === 'todo') { %>
+                          bg-blue-100 text-blue-800
+                        <% } else { %>
+                          bg-green-100 text-green-800 
+                        <% } %>"
+                    >
+                      <%= todo.state %>
+                    </span>
+                  </div>
+                  <p class="text-gray-500 text-sm mb-4">Added recently</p>
+                  <!-- Buttons Row -->
+                  <div class="flex space-x-2">
+                    <!-- Mark as Completed Button -->
+                    <form action="/mark-completed/<%= todo._id %>" method="post">
+                      <button
+                      <% if (todo.state === "completed") { %>
+                        disabled
+                      <% } %>
+                      type="submit"
+                      class="flex-1 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow-md 
+                        transition-all duration-200 ease-in-out flex items-center justify-center disabled:bg-gray-500 disabled:cursor-not-allowed"
+                      >
+                      <% if (todo.state === "completed") { %>
+                        Done
+                      <% } else { %>
+                        Mark as completed
+                      <% } %>
+                      </button>
+                    </form>
+                    <!-- Delete Button -->
+                    <form action="/delete/<%= todo._id %>" method="post">
+                      <button
+                        type="submit"
+                        class="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2 px-3 rounded-lg shadow-md 
+                        transition-all duration-200 ease-in-out flex items-center justify-center"
+                      >
+                        <svg
+                          width="16"
+                          height="16"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="white"
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                        >
+                          <path
+                            d="M19 24h-14c-1.104 0-2-.896-2-2v-16h18v16c0 1.104-.896 2-2 2zm-7-10.414l3.293-3.293 1.414 1.414-3.293 3.293 3.293 3.293-1.414 1.414-3.293-3.293-3.293 3.293-1.414-1.414 3.293-3.293-3.293-3.293 1.414-1.414 3.293 3.293zm10-8.586h-20v-2h6v-1.5c0-.827.673-1.5 1.5-1.5h5c.825 0 1.5.671 1.5 1.5v1.5h6v2zm-8-3h-4v1h4v-1z"
+                          />
+                        </svg>
+                      </button>
+                    </form>
+                  </div>
+                </li>
+              <% }) %>
+            <% } else { %>
+              <div class="text-center text-gray-500">
+                <p>There's no task to show. Try adding one!</p>
+              </div>
+            <% } %>
+          </ul>
+          
+        </div>
+      </main>
+      <%- include('partials/footer.ejs') %>
+    </div>
+    <script src="javascripts/main.js"></script>
+  </body>
+</html>
