@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "style": "npx tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch",
+    "build": "npm run style",
     "test": "node --test"
   },
   "keywords": [],
