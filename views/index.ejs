@@ -5,12 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="stylesheets/output.css" />
     <title>Todo App | Made by ReDhaBenKortbi</title>
+    <style>
+      .open__modal {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.close__modal {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+}
+.home__layout {
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 64px 1fr 64px;
+}
+ #notification.fade-out {
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+    </style>
   </head>
   <body class="w-full h-screen bg-gray-200">
     <% if (errorMessage) { %>
           <div id="notification" class="absolute top-5 left-1/2 -translate-x-1/2 bg-red-100 text-red-500 border border-red-500 px-6 py-2 rounded-md"><%= errorMessage %></div>
     <% } %>
-    <div class="wrapper home__layout">
+    <div class="home__layout">
       <%- include('partials/header.ejs') %>
       <main class="relative">
         <!-- CREATE TODO TASK -->

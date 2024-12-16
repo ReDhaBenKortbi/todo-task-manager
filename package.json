@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "style": "npx tailwindcss -i ./public/stylesheets/input.css -o ./public/stylesheets/output.css --watch",
-    "build": "npm run style",
+    "dev": "nodemon server.js",
+    "style": "npx tailwindcss -i ./static/stylesheets/input.css -o ./publistatic/stylesheets/output.css --watch",
+    "build": "npx tailwindcss -i ./static/stylesheets/input.css -o ./static/stylesheets/output.css",
     "test": "node --test"
   },
   "keywords": [],

@@ -68,7 +68,7 @@ dist
 
 # Gatsby files
 .cache/
-public
+
 
 # vuepress release directory
 .vuepress/dist/
@@ -98,3 +98,8 @@ public
 
 # EJS temp views cache (if applicable)
 views/*.tmp
+
+
+# Env vars
+.env
+env*
